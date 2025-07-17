@@ -23,6 +23,11 @@ def shrani_url_po_igrah():
     
     with open("oi6_url_po-igrah.csv", "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["Zaporedna številka", "URL", "Mesto-Leto"])  # Trije stolpci
-        for poz, url, mestoleto in matches:
-            writer.writerow([poz, url, mestoleto])
+        writer.writerow(["Zaporedna številka", "URL", "Mesto", "Leto"])
+        
+        for zap_st, full_url, mestoleto in matches:
+            loceno = mestoleto.split('-')
+            leto = loceno[-1]
+            mesto = ' '.join(loceno[:-1]).title()
+            
+            writer.writerow([zap_st, full_url, mesto, leto])
