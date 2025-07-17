@@ -7,7 +7,4 @@ if not os.path.exists("oi5_spletnastran.html"):     # shrani spletno stran kot h
     oi2_pridobi.shrani_url__kot_html()
 
 if not os.path.exists("oi6_linki_po-igrah.csv"):    # shrani htmlje po igrah (letih) v csv
-    oi2_pridobi.shrani_htmlje_po_igrah()
-
-if not os.path.exists("oi7_linki_po-igrah-mestih.csv"):    # shrani htmlje po igrah v csv, dodaten stolpec za mesto-leto
     oi2_pridobi.shrani_htmlje_po_igrah2()
