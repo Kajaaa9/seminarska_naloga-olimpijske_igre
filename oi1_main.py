@@ -12,5 +12,5 @@ if not os.path.exists("oi6_url_po-igrah.csv"):          # shrani url po igrah (l
 if not os.path.exists("oi7_html_po-igrah"):             # shrani html po igrah (letih) v mapo
     oi2_pridobi.shrani_url_kot_html_po_igrah()
 
-# if not os.path.exists("oi7_html_po-igrah_medalje"):     # shrani html za medalje po igrah (letih) v mapo
-#     oi2_pridobi.shrani_url_kot_html_po_igrah_medalje()
+if not os.path.exists("oi7_html_po-igrah_medalje"):     # shrani html za medalje po igrah (letih) v mapo
+    oi2_pridobi.shrani_url_kot_html_po_igrah_medalje()

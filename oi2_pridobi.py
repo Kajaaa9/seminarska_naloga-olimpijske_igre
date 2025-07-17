@@ -1,8 +1,8 @@
 import requests
 import csv
 import re
-import time
 import os
+import time
 
 url = "https://www.olympics.com/en/olympic-games"
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"}
@@ -51,19 +51,18 @@ def shrani_url_kot_html_po_igrah():
             polna_pot = os.path.join("oi7_html_po-igrah", ime_datoteke)
                 
             try:
-                print(f"Shranjujem: {url}") # Pridobivanje vsebine s spletne strani
                 odziv = requests.get(url, headers=headers, timeout=10)
-                odziv.raise_for_status() # Preverimo uspešnost zahteve
+                odziv.raise_for_status()
                 
-                with open(polna_pot, "w", encoding="utf-8") as izhodna_datoteka:# 7. Shranjevanje vsebine v datoteko
+                with open(polna_pot, "w", encoding="utf-8") as izhodna_datoteka:
                     izhodna_datoteka.write(odziv.text)
-                    print(f"Uspešno shranjeno v {ime_datoteke}")
                 
                 time.sleep(1)
                 
-            except requests.exceptions.RequestException as e:
+            except requests.exceptions.RequestException as e:   # ce pride do napake pri povezavi ali kaj v povezavi z requests
                 print(f"Napaka pri dostopu do {url}: {str(e)}")
-            except Exception as e:
+
+            except Exception as e:                              # ce pride do druge napake (npr. napaka pri zapisu v datoteko)
                 print(f"Neznana napaka: {str(e)}")
 
 
@@ -83,18 +82,15 @@ def shrani_url_kot_html_po_igrah_medalje():
             polna_pot = os.path.join("oi7_html_po-igrah_medalje", ime_datoteke)
                 
             try:
-                print(f"Shranjujem: {url}") # Pridobivanje vsebine s spletne strani
                 odziv = requests.get(url, headers=headers, timeout=10)
-                odziv.raise_for_status() # Preverimo uspešnost zahteve
+                odziv.raise_for_status()
                 
-                with open(polna_pot, "w", encoding="utf-8") as izhodna_datoteka:# 7. Shranjevanje vsebine v datoteko
+                with open(polna_pot, "w", encoding="utf-8") as izhodna_datoteka:
                     izhodna_datoteka.write(odziv.text)
-                    print(f"Uspešno shranjeno v {ime_datoteke}")
                 
                 time.sleep(1)
                 
             except requests.exceptions.RequestException as e:
-                # 9. Obdelava napak
                 print(f"Napaka pri dostopu do {url}: {str(e)}")
             except Exception as e:
                 print(f"Neznana napaka: {str(e)}")
