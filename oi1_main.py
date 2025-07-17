@@ -14,3 +14,6 @@ if not os.path.exists("oi7_html_po-igrah"):             # shrani html po igrah (
 
 if not os.path.exists("oi7_html_po-igrah_medalje"):     # shrani html za medalje po igrah (letih) v mapo
     oi2_pridobi.shrani_url_kot_html_po_igrah_medalje()
+
+if not os.path.exists("oi8_medalje_po_drzavah"):        # naredi mapo s csv tabelami medalj po drzavah (za vsako igro (leto) posebaj)
+    oi3_izlusci.st_medalj_po_drzavah()
