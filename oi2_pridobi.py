@@ -22,8 +22,8 @@ def shrani_url_po_igrah():
 
     matches = re.findall(vzorec, url_html, re.DOTALL)
     
-    with open("oi6_url_po-igrah.csv", "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
+    with open("oi6_url_po-igrah.csv", "w", newline="", encoding="utf-8") as datoteka_oi5:
+        writer = csv.writer(datoteka_oi5)
         writer.writerow(["Zaporedna številka", "URL", "Mesto", "Leto"])
         
         for zap_st, full_url, mestoleto in matches:
@@ -39,10 +39,10 @@ def shrani_url_kot_html_po_igrah():
     
     os.mkdir("oi7_html_po-igrah")
     
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as csv_datoteka:
-        csv_bralec = csv.DictReader(csv_datoteka)
+    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+        besedilo = csv.DictReader(datoteka_oi6)
         
-        for vrstica in csv_bralec:
+        for vrstica in besedilo:
             url = vrstica["URL"]
             mesto = vrstica["Mesto"]
             leto = vrstica["Leto"]
@@ -70,10 +70,10 @@ def shrani_url_kot_html_po_igrah_medalje():
     
     os.mkdir("oi7_html_po-igrah_medalje")
     
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as csv_datoteka:
-        csv_bralec = csv.DictReader(csv_datoteka)
+    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+        besedilo = csv.DictReader(datoteka_oi6)
         
-        for vrstica in csv_bralec:
+        for vrstica in besedilo:
             url = vrstica["URL"].replace("/olympic-games/", "/en/olympic-games/") + "/medals"
             mesto = vrstica["Mesto"]
             leto = vrstica["Leto"]
