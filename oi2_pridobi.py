@@ -78,7 +78,7 @@ def shrani_url_kot_html_po_igrah_medalje():
         besedilo = csv.DictReader(datoteka_oi6)
         
         for vrstica in besedilo:
-            url = vrstica["URL"].replace("/olympic-games/", "/en/olympic-games/") + "/medals"
+            url = vrstica["URL"] + "/medals"
             mesto = vrstica["Mesto"]
             leto = vrstica["Leto"]
             
@@ -100,3 +100,36 @@ def shrani_url_kot_html_po_igrah_medalje():
                 print(f"Neznana napaka: {str(e)}")
 
     print("Mapa oi7_html_po-igrah_medalje ustvarjena.")
+
+
+def shrani_url_kot_html_po_igrah_rezultati():
+    
+    os.mkdir("oi7_html_po-igrah_rezultati")
+    
+    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+        besedilo = csv.DictReader(datoteka_oi6)
+        
+        for vrstica in besedilo:
+            url = vrstica["URL"] + "/results"
+            mesto = vrstica["Mesto"]
+            leto = vrstica["Leto"]
+
+            ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}.html"
+            polna_pot = os.path.join("oi7_html_po-igrah_rezultati", ime_datoteke)
+                
+            try:
+                odziv = requests.get(url, headers=headers, timeout=10)
+                odziv.raise_for_status()
+                
+                with open(polna_pot, "w", encoding="utf-8") as izhodna_datoteka:
+                    izhodna_datoteka.write(odziv.text)
+                
+                time.sleep(1)
+                
+            except requests.exceptions.RequestException as e:
+                print(f"Napaka pri dostopu do {url}: {str(e)}")
+            except Exception as e:
+                print(f"Neznana napaka: {str(e)}")
+
+    print("Mapa oi7_html_po-igrah_rezultati ustvarjena.")
+
