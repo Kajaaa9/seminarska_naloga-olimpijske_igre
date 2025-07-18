@@ -4,7 +4,7 @@ import re
 import os
 import time
 
-url = "https://www.olympics.com/en/olympic-games"   # dostop do spletne strani 17.7.2025
+url = "https://www.olympics.com/en/olympic-games"   # dostop do, prenos spletne strani 17.7.2025
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"}
 
 
@@ -33,6 +33,9 @@ def shrani_url_po_igrah():
             mesto = ' '.join(loceno[:-1]).title()
             url = full_url.replace("/olympic-games/", "/en/olympic-games/")
             
+            if int(leto) > 2024:              # da pridobim url-je le za olimpijske igre, ki so ze potekale
+                continue
+
             writer.writerow([zap_st, url, mesto, leto])
 
     print("Datoteka oi6_url_po-igrah.csv ustvarjena.")
