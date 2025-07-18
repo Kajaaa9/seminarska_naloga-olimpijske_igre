@@ -76,6 +76,19 @@ def seznam_disciplin_po_letih():
 
 def discipline_skupaj():
     
+    podatki_igre = {}
+    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as f:
+        besedilo = csv.DictReader(f)
+        for vrstica in besedilo:
+
+            leto = vrstica["Leto"]
+            mesto = vrstica["Mesto"].replace(" ", "_")
+            ime = f"{leto}-{mesto}"
+
+            vrsta = vrstica["Vrsta"]
+            podatki_igre[ime] = vrsta #slovar z {letomesto:vrsta}
+
+
     igre = []  # to bo v glavi tabele
     vse_discipline = set()
     discipline_po_igrah = {}  # slovar: {letomesto: množica_disciplin}
@@ -105,6 +118,10 @@ def discipline_skupaj():
         writer = csv.writer(f)
         glava = ["Disciplina"] + igre
         writer.writerow(glava)
+
+        vrstica_vrsta = ["Vrsta"] + [podatki_igre.get(igra) for igra in igre]
+
+        writer.writerow(vrstica_vrsta)
 
         for disciplina in vse_discipline:
             vrstica = [disciplina]  # začnemo z imenom discipline
