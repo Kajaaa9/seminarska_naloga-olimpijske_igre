@@ -20,23 +20,26 @@ def shrani_url_po_igrah():
         url_html = f.read()
 
     vzorec = r'"@type":"ListItem",\s*"position":(\d+),\s*"url":"(https://www\.olympics\.com/olympic-games/([^"]+))"'
-
     matches = re.findall(vzorec, url_html, re.DOTALL)
+
+    vzorec2 = r'"slug":"([^"]+?)".*?"season":"(Summer|Winter)"'
+    matches2 = dict(re.findall(vzorec2, url_html))
     
     with open("oi6_url_po-igrah.csv", "w", newline="", encoding="utf-8") as datoteka_oi5:
         writer = csv.writer(datoteka_oi5)
-        writer.writerow(["Zaporedna številka", "URL", "Mesto", "Leto"])
+        writer.writerow(["Zaporedna številka", "URL", "Mesto", "Leto", "Vrsta"])
         
         for zap_st, full_url, mestoleto in matches:
             loceno = mestoleto.split('-')
             leto = loceno[-1]
             mesto = ' '.join(loceno[:-1]).title()
             url = full_url.replace("/olympic-games/", "/en/olympic-games/")
-            
+            vrsta = matches2.get(mestoleto.lower(), "Neznano")
+
             if int(leto) > 2024:              # da pridobim url-je le za olimpijske igre, ki so ze potekale
                 continue
 
-            writer.writerow([zap_st, url, mesto, leto])
+            writer.writerow([zap_st, url, mesto, leto, vrsta])
 
     print("Datoteka oi6_url_po-igrah.csv ustvarjena.")
 
