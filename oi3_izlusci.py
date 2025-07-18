@@ -66,10 +66,55 @@ def seznam_disciplin_po_letih():
         
         with open(izhodna_pot, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(["Šport"])
+            writer.writerow(["Disciplina"])
             
             for disciplina in matches:
                 writer.writerow([disciplina])
         
     print("Mapa oi9_discipline_po-igrah ustvarjena.")
+
+
+def discipline_skupaj():
+    
+    igre = []  # to bo v glavi tabele
+    vse_discipline = set()
+    discipline_po_igrah = {}  # slovar: {letomesto: množica_disciplin}
+
+    for datoteka in os.listdir("oi9_discipline_po-igrah"):
+        letomesto = datoteka.replace("_discipline.csv", "")
+        igre.append(letomesto)
+        pot = os.path.join("oi9_discipline_po-igrah", datoteka)
+
+        with open(pot, "r", encoding="utf-8") as f:
+            besedilo = csv.reader(f)
+            next(besedilo)  # preskoci glavo
+            discipline = set()  # lokalna množica disciplin za to igro
+            for vrstica in besedilo:
+                disciplina = vrstica[0]
+                # disciplina = vrstica[0].strip()  # odstrani presledke....to bom dala samo ce bo nujno
+
+                if disciplina:  # ce ni prazno-zaradi zadnje vrstice
+                    discipline.add(disciplina) 
+                    vse_discipline.add(disciplina)
+
+            discipline_po_igrah[letomesto] = discipline
+
+    vse_discipline = sorted(vse_discipline) # po abecedi
+
+    with open("oi10_discipline_pregled.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        glava = ["Disciplina"] + igre
+        writer.writerow(glava)
+
+        for disciplina in vse_discipline:
+            vrstica = [disciplina]  # začnemo z imenom discipline
+
+            for igra in igre:
+                if disciplina in discipline_po_igrah.get(igra, set()):
+                    vrstica.append("X")
+                else:
+                    vrstica.append("-")
+            writer.writerow(vrstica)  # zapišemo vrstico v datoteko
+
+    print("Datoteka oi10_discipline_pregled.csv ustvarjena.")
 

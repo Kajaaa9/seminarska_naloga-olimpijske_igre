@@ -24,3 +24,5 @@ if not os.path.exists("oi7_html_po-igrah_rezultati"):   # shrani html-je za rezu
 if not os.path.exists("oi9_discipline_po-igrah"):       # naredi mapo s csv tabelami disciplin po letih
     oi3_izlusci.seznam_disciplin_po_letih()
 
+if not os.path.exists("oi10_discipline_pregled.csv"):   # naredi csv tabelo disciplin po letih
+    oi3_izlusci.discipline_skupaj()
