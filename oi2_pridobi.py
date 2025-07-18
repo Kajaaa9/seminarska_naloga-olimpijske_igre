@@ -4,13 +4,14 @@ import re
 import os
 import time
 
-url = "https://www.olympics.com/en/olympic-games"
+url = "https://www.olympics.com/en/olympic-games"   # dostop do spletne strani 17.7.2025
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"}
 
 
 def shrani_url_kot_html():
     with open("oi5_olimpijske-igre.html", "w", encoding="utf-8") as f:
         f.write(requests.get(url, headers=headers).text)
+    print("Datoteka oi5_olimpijske-igre.html ustvarjena.")
 
 
 def shrani_url_po_igrah():
@@ -33,6 +34,8 @@ def shrani_url_po_igrah():
             url = full_url.replace("/olympic-games/", "/en/olympic-games/")
             
             writer.writerow([zap_st, url, mesto, leto])
+
+    print("Datoteka oi6_url_po-igrah.csv ustvarjena.")
 
 
 def shrani_url_kot_html_po_igrah():
@@ -65,6 +68,7 @@ def shrani_url_kot_html_po_igrah():
             except Exception as e:                              # ce pride do druge napake (npr. napaka pri zapisu v datoteko)
                 print(f"Neznana napaka: {str(e)}")
 
+    print("Mapa oi7_html_po-igrah ustvarjena.")
 
 def shrani_url_kot_html_po_igrah_medalje():
     
@@ -95,3 +99,4 @@ def shrani_url_kot_html_po_igrah_medalje():
             except Exception as e:
                 print(f"Neznana napaka: {str(e)}")
 
+    print("Mapa oi7_html_po-igrah_medalje ustvarjena.")
