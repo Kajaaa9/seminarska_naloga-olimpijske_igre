@@ -42,5 +42,34 @@ def st_medalj_po_drzavah():
                 medalje = [m if m != '-' else '0' for m in medalje]
                 writer.writerow([drzava] + medalje)
         
-    print(f"Datoteka {ime_datoteke} ustvarjena.")
+    print("Mapa oi8_medalje_po_drzavah ustvarjena.")
+
+
+def seznam_disciplin_po_letih():
+
+    vhodna_mapa = "oi7_html_po-igrah_rezultati"
+    os.mkdir("oi9_discipline_po-igrah")
+        
+    vzorec = r'"sportDisciplineId":"[^"]+?".*?"title":"([^"]+?)"'
+
+    for datoteka in os.listdir(vhodna_mapa):
+
+        vhodna_pot = os.path.join(vhodna_mapa, datoteka)
+
+        with open(vhodna_pot, "r", encoding="utf-8") as f:
+            url_html = f.read()
+
+        matches = re.findall(vzorec, url_html, re.DOTALL)
+
+        ime_datoteke = os.path.splitext(datoteka)[0] + "_discipline.csv"
+        izhodna_pot = os.path.join("oi9_discipline_po-igrah", ime_datoteke)
+        
+        with open(izhodna_pot, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Šport"])
+            
+            for disciplina in matches:
+                writer.writerow([disciplina])
+        
+    print("Mapa oi9_discipline_po-igrah ustvarjena.")
 
