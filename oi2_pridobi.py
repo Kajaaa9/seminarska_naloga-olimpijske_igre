@@ -78,7 +78,7 @@ def shrani_url_kot_html_po_igrah():
 
 def shrani_url_kot_html_po_igrah_medalje():
     
-    os.mkdir("oi7_html_po-igrah_medalje")
+    os.mkdir("oi8.1_html_po-igrah_medalje")
     
     with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
         besedilo = csv.DictReader(datoteka_oi6)
@@ -89,7 +89,7 @@ def shrani_url_kot_html_po_igrah_medalje():
             leto = vrstica["Leto"]
             
             ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}.html"
-            polna_pot = os.path.join("oi7_html_po-igrah_medalje", ime_datoteke)
+            polna_pot = os.path.join("oi8.1_html_po-igrah_medalje", ime_datoteke)
                 
             try:
                 odziv = requests.get(url, headers=headers, timeout=10)
@@ -105,12 +105,12 @@ def shrani_url_kot_html_po_igrah_medalje():
             except Exception as e:
                 print(f"Neznana napaka: {str(e)}")
 
-    print("Mapa oi7_html_po-igrah_medalje ustvarjena.")
+    print("Mapa oi8.1_html_po-igrah_medalje ustvarjena.")
 
 
 def shrani_url_kot_html_po_igrah_rezultati():
     
-    os.mkdir("oi7_html_po-igrah_rezultati")
+    os.mkdir("oi9.1_html_po-igrah_rezultati")
     
     with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
         besedilo = csv.DictReader(datoteka_oi6)
@@ -121,7 +121,7 @@ def shrani_url_kot_html_po_igrah_rezultati():
             leto = vrstica["Leto"]
 
             ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}.html"
-            polna_pot = os.path.join("oi7_html_po-igrah_rezultati", ime_datoteke)
+            polna_pot = os.path.join("oi9.1_html_po-igrah_rezultati", ime_datoteke)
                 
             try:
                 odziv = requests.get(url, headers=headers, timeout=10)
@@ -137,5 +137,5 @@ def shrani_url_kot_html_po_igrah_rezultati():
             except Exception as e:
                 print(f"Neznana napaka: {str(e)}")
 
-    print("Mapa oi7_html_po-igrah_rezultati ustvarjena.")
+    print("Mapa oi9.1_html_po-igrah_rezultati ustvarjena.")
 
