@@ -38,21 +38,26 @@ def medalje_skupaj():
 
     vse_drzave = sorted(podatki_medalj.keys())
 
-    # Priprava glave tabele z 4 stolpci za vsak letomesto
-    glava = ["Država"]
-    for igra in igre:
-        glava += [f"{igra}-Zlate", f"{igra}-Srebrne", f"{igra}-Bronaste", f"{igra}-Skupaj"]
-
     with open("oi8.3_medalje_pregled.csv", "w", newline="", encoding="utf-8") as f:
-        pisalec = csv.writer(f)
-        pisalec.writerow(glava)
+        writer = csv.writer(f)
+
+        glava = ["Država"]
+        for igra in igre:
+            glava += [f"{igra}-Zlate", f"{igra}-Srebrne", f"{igra}-Bronaste", f"{igra}-Skupaj"]
+        writer.writerow(glava)
+
+        vrstica_vrsta = ["Vrsta"]
+        for igra in igre:
+            vrsta = podatki_igre.get(igra, "")
+            vrstica_vrsta += [vrsta] * 4
+        writer.writerow(vrstica_vrsta)
 
         for drzava in vse_drzave:
             vrstica = [drzava]
             for igra in igre:
                 medalje = podatki_medalj[drzava].get(igra, [0, 0, 0, 0])
                 vrstica.extend(medalje)
-            pisalec.writerow(vrstica)
+            writer.writerow(vrstica)
 
     print("Datoteka oi8.3_medalje_pregled.csv ustvarjena.")
 
