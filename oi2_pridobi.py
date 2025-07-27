@@ -87,8 +87,9 @@ def shrani_url_kot_html_po_igrah_medalje():
             url = vrstica["URL"] + "/medals"
             mesto = vrstica["Mesto"]
             leto = vrstica["Leto"]
+            vrsta = vrstica["Vrsta"]
             
-            ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}.html"
+            ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}-{vrsta}.html"
             polna_pot = os.path.join("oi8.1_html_po-igrah_medalje", ime_datoteke)
                 
             try:
@@ -119,8 +120,9 @@ def shrani_url_kot_html_po_igrah_rezultati():
             url = vrstica["URL"] + "/results"
             mesto = vrstica["Mesto"]
             leto = vrstica["Leto"]
+            vrsta = vrstica["Vrsta"]
 
-            ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}.html"
+            ime_datoteke = f"{leto}-{mesto.replace(' ', '_')}-{vrsta}.html"
             polna_pot = os.path.join("oi9.1_html_po-igrah_rezultati", ime_datoteke)
                 
             try:

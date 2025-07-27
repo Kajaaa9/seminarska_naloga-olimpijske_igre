@@ -2,23 +2,13 @@ import csv
 import os
 
 def medalje_skupaj():
-    
-    podatki_igre = {}
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as f:
-        besedilo = csv.DictReader(f)
-        for vrstica in besedilo:
-            leto = vrstica["Leto"]
-            mesto = vrstica["Mesto"].replace(" ", "_")
-            ime = f"{leto}-{mesto}"
-            vrsta = vrstica["Vrsta"]
-            podatki_igre[ime] = vrsta
 
-    podatki_medalj = {}  # slovar: {drzava: {letomesto: [zlate, srebrne, bronaste, skupaj]}}
-    igre = []  # seznam let-mest, po vrstnem redu datotek
+    podatki_medalj = {}  # slovar {drzava: {letomestovrsta: [zlate, srebrne, bronaste, skupaj]}}
+    igre = []  # seznam leto-mesto-vrsta, po vrstnem redu datotek
 
     for datoteka in os.listdir("oi8.2_medalje_po_drzavah"):
-        letomesto = datoteka.replace("_medalje.csv", "")
-        igre.append(letomesto)
+        letomestovrsta = datoteka.replace("_medalje.csv", "")
+        igre.append(letomestovrsta)
         pot = os.path.join("oi8.2_medalje_po_drzavah", datoteka)
 
         with open(pot, "r", encoding="utf-8") as f:
@@ -34,7 +24,7 @@ def medalje_skupaj():
                 if drzava not in podatki_medalj:
                     podatki_medalj[drzava] = {}
 
-                podatki_medalj[drzava][letomesto] = [zlate, srebrne, bronaste, skupaj]
+                podatki_medalj[drzava][letomestovrsta] = [zlate, srebrne, bronaste, skupaj]
 
     vse_drzave = sorted(podatki_medalj.keys())
 
@@ -45,12 +35,6 @@ def medalje_skupaj():
         for igra in igre:
             glava += [f"{igra}-Zlate", f"{igra}-Srebrne", f"{igra}-Bronaste", f"{igra}-Skupaj"]
         writer.writerow(glava)
-
-        vrstica_vrsta = ["Vrsta"]
-        for igra in igre:
-            vrsta = podatki_igre.get(igra, "")
-            vrstica_vrsta += [vrsta] * 4
-        writer.writerow(vrstica_vrsta)
 
         for drzava in vse_drzave:
             vrstica = [drzava]
@@ -63,27 +47,14 @@ def medalje_skupaj():
 
 
 def discipline_skupaj():
-    
-    podatki_igre = {}
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as f:
-        besedilo = csv.DictReader(f)
-        for vrstica in besedilo:
 
-            leto = vrstica["Leto"]
-            mesto = vrstica["Mesto"].replace(" ", "_")
-            ime = f"{leto}-{mesto}"
-
-            vrsta = vrstica["Vrsta"]
-            podatki_igre[ime] = vrsta #slovar z {letomesto:vrsta}
-
-
-    igre = []  # to bo v glavi tabele
+    igre = []
     vse_discipline = set()
-    discipline_po_igrah = {}  # slovar: {letomesto: množica_disciplin}
+    discipline_po_igrah = {}  # slovar: {letomestovrsta: množica_disciplin}
 
     for datoteka in os.listdir("oi9.2_discipline_po-igrah"):
-        letomesto = datoteka.replace("_discipline.csv", "")
-        igre.append(letomesto)
+        letomestovrsta = datoteka.replace("_discipline.csv", "")
+        igre.append(letomestovrsta)
         pot = os.path.join("oi9.2_discipline_po-igrah", datoteka)
 
         with open(pot, "r", encoding="utf-8") as f:
@@ -98,7 +69,7 @@ def discipline_skupaj():
                     discipline.add(disciplina) 
                     vse_discipline.add(disciplina)
 
-            discipline_po_igrah[letomesto] = discipline
+            discipline_po_igrah[letomestovrsta] = discipline
 
     vse_discipline = sorted(vse_discipline) # po abecedi
 
@@ -107,9 +78,9 @@ def discipline_skupaj():
         glava = ["Disciplina"] + igre
         writer.writerow(glava)
 
-        vrstica_vrsta = ["Vrsta"] + [podatki_igre.get(igra) for igra in igre]
+        # vrstica_vrsta = ["Vrsta"] + [podatki_igre.get(igra) for igra in igre]
 
-        writer.writerow(vrstica_vrsta)
+        # writer.writerow(vrstica_vrsta)
 
         for disciplina in vse_discipline:
             vrstica = [disciplina]  # začnemo z imenom discipline
