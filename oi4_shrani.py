@@ -87,9 +87,9 @@ def discipline_skupaj():
 
             for igra in igre:
                 if disciplina in discipline_po_igrah.get(igra, set()):
-                    vrstica.append("X")
+                    vrstica.append("1")
                 else:
-                    vrstica.append("-")
+                    vrstica.append("0")
             writer.writerow(vrstica)  # zapišemo vrstico v datoteko
 
     print("Datoteka oi9.3_discipline_pregled.csv ustvarjena.")
