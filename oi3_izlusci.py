@@ -35,6 +35,9 @@ def st_medalj_po_drzavah():
             medalje = [m if m != '-' else '0' for m in medalje]
             podatki.append([drzava] + medalje)
 
+        if not podatki: # ce ni podatkov za to leto ne bo naredilo datoteke
+            continue
+
         podatki.sort(key=lambda x: x[0])  # urejanje po abecedi
 
         ime_datoteke = os.path.splitext(datoteka)[0] + "_medalje.csv"
