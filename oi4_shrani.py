@@ -6,10 +6,10 @@ def medalje_skupaj():
     podatki_medalj = {}  # slovar {drzava: {letomestovrsta: [zlate, srebrne, bronaste, skupaj]}}
     igre = []  # seznam leto-mesto-vrsta, po vrstnem redu datotek
 
-    for datoteka in os.listdir("oi8.2_medalje_po_drzavah"):
+    for datoteka in os.listdir("oi8.2_medalje_po-igrah"):
         letomestovrsta = datoteka.replace("_medalje.csv", "")
         igre.append(letomestovrsta)
-        pot = os.path.join("oi8.2_medalje_po_drzavah", datoteka)
+        pot = os.path.join("oi8.2_medalje_po-igrah", datoteka)
 
         with open(pot, "r", encoding="utf-8") as f:
             besedilo = csv.DictReader(f)

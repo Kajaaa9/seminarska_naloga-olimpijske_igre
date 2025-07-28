@@ -6,7 +6,7 @@ import os
 def st_medalj_po_drzavah():
 
     vhodna_mapa = "oi8.1_html_po-igrah_medalje"
-    os.mkdir("oi8.2_medalje_po_drzavah")
+    os.mkdir("oi8.2_medalje_po-igrah")
     
     vzorec = re.compile(
         r'<span data-cy="country-name"[^>]*>([^<]+)</span>.*?'
@@ -38,14 +38,14 @@ def st_medalj_po_drzavah():
         podatki.sort(key=lambda x: x[0])  # urejanje po abecedi
 
         ime_datoteke = os.path.splitext(datoteka)[0] + "_medalje.csv"
-        izhodna_pot = os.path.join("oi8.2_medalje_po_drzavah", ime_datoteke)      #ustvari datoteko za vsako leto posebaj znotraj mape oi8.2_medalje_po_drzavah
+        izhodna_pot = os.path.join("oi8.2_medalje_po-igrah", ime_datoteke)      #ustvari datoteko za vsako leto posebaj znotraj mape oi8.2_medalje_po-igrah
         
         with open(izhodna_pot, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["Država", "Zlate medalje", "Srebrne medalje", "Bronaste medalje", "Skupaj"])
             writer.writerows(podatki)
         
-    print("Mapa oi8.2_medalje_po_drzavah ustvarjena.")
+    print("Mapa oi8.2_medalje_po-igrah ustvarjena.")
 
 
 def seznam_disciplin_po_letih():

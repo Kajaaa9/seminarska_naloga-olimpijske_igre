@@ -9,14 +9,14 @@ headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleW
 
 
 def shrani_url_kot_html():
-    with open("oi5_olimpijske-igre.html", "w", encoding="utf-8") as f:
+    with open("oi6.1_olimpijske-igre.html", "w", encoding="utf-8") as f:
         f.write(requests.get(url, headers=headers).text)
-    print("Datoteka oi5_olimpijske-igre.html ustvarjena.")
+    print("Datoteka oi6.1_olimpijske-igre.html ustvarjena.")
 
 
 def shrani_url_po_igrah():
 
-    with open("oi5_olimpijske-igre.html", "r", encoding="utf-8") as f:
+    with open("oi6.1_olimpijske-igre.html", "r", encoding="utf-8") as f:
         url_html = f.read()
 
     vzorec = r'"@type":"ListItem",\s*"position":(\d+),\s*"url":"(https://www\.olympics\.com/olympic-games/([^"]+))"'
@@ -25,7 +25,7 @@ def shrani_url_po_igrah():
     vzorec2 = r'"slug":"([^"]+?)".*?"season":"(Summer|Winter)"'
     matches2 = dict(re.findall(vzorec2, url_html))
     
-    with open("oi6_url_po-igrah.csv", "w", newline="", encoding="utf-8") as datoteka_oi5:
+    with open("oi6.2_url_po-igrah.csv", "w", newline="", encoding="utf-8") as datoteka_oi5:
         writer = csv.writer(datoteka_oi5)
         writer.writerow(["Zaporedna številka", "URL", "Mesto", "Leto", "Vrsta"])
         
@@ -41,14 +41,14 @@ def shrani_url_po_igrah():
 
             writer.writerow([zap_st, url, mesto, leto, vrsta])
 
-    print("Datoteka oi6_url_po-igrah.csv ustvarjena.")
+    print("Datoteka oi6.2_url_po-igrah.csv ustvarjena.")
 
 
 def shrani_url_kot_html_po_igrah():
     
     os.mkdir("oi7_html_po-igrah")
     
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+    with open("oi6.2_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
         besedilo = csv.DictReader(datoteka_oi6)
         
         for vrstica in besedilo:
@@ -80,7 +80,7 @@ def shrani_url_kot_html_po_igrah_medalje():
     
     os.mkdir("oi8.1_html_po-igrah_medalje")
     
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+    with open("oi6.2_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
         besedilo = csv.DictReader(datoteka_oi6)
         
         for vrstica in besedilo:
@@ -113,7 +113,7 @@ def shrani_url_kot_html_po_igrah_rezultati():
     
     os.mkdir("oi9.1_html_po-igrah_rezultati")
     
-    with open("oi6_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
+    with open("oi6.2_url_po-igrah.csv", "r", encoding="utf-8") as datoteka_oi6:
         besedilo = csv.DictReader(datoteka_oi6)
         
         for vrstica in besedilo:
