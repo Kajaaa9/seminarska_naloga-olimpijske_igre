@@ -38,10 +38,10 @@ def st_medalj_po_drzavah():
         if not podatki: # ce ni podatkov za to leto ne bo naredilo datoteke
             continue
 
-        podatki.sort(key=lambda x: x[0])  # urejanje po abecedi
+        podatki.sort(key=lambda x: x[0])
 
         ime_datoteke = os.path.splitext(datoteka)[0] + "_medalje.csv"
-        izhodna_pot = os.path.join("oi8.2_medalje_po-igrah", ime_datoteke)      #ustvari datoteko za vsako leto posebaj znotraj mape oi8.2_medalje_po-igrah
+        izhodna_pot = os.path.join("oi8.2_medalje_po-igrah", ime_datoteke)
         
         with open(izhodna_pot, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)

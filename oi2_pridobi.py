@@ -4,7 +4,7 @@ import re
 import os
 import time
 
-url = "https://www.olympics.com/en/olympic-games"   # dostop do, prenos spletne strani 17.7.2025
+url = "https://www.olympics.com/en/olympic-games"   # prenos spletne strani 17.7.2025
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"}
 
 
@@ -68,13 +68,14 @@ def shrani_url_kot_html_po_igrah():
                 
                 time.sleep(1)
                 
-            except requests.exceptions.RequestException as e:   # ce pride do napake pri povezavi ali kaj v povezavi z requests
+            except requests.exceptions.RequestException as e:
                 print(f"Napaka pri dostopu do {url}: {str(e)}")
 
-            except Exception as e:                              # ce pride do druge napake (npr. napaka pri zapisu v datoteko)
+            except Exception as e:
                 print(f"Neznana napaka: {str(e)}")
 
     print("Mapa oi7_html_po-igrah ustvarjena.")
+
 
 def shrani_url_kot_html_po_igrah_medalje():
     

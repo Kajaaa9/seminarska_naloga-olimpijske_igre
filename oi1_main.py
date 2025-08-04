@@ -3,31 +3,32 @@ import oi3_izlusci
 import oi4_shrani
 import os
 
-if not os.path.exists("oi6.1_olimpijske-igre.html"):      # shrani spletno stran kot html
+
+if not os.path.exists("oi6.1_olimpijske-igre.html"):    # shrani spletno stran kot html
     oi2_pridobi.shrani_url_kot_html()                     # prenos spletne strani 18.7.2025
 
-if not os.path.exists("oi6.2_url_po-igrah.csv"):          # shrani url-je po igrah (letih) v csv
+if not os.path.exists("oi6.2_url_po-igrah.csv"):        # shrani url-je po igrah v csv
     oi2_pridobi.shrani_url_po_igrah()
 
-if not os.path.exists("oi7_html_po-igrah"):             # shrani html-je po igrah (letih) v mapo
+if not os.path.exists("oi7_html_po-igrah"):             # shrani html-je po igrah v mapo
     oi2_pridobi.shrani_url_kot_html_po_igrah()            # prenos spletnih strani 18.7.2025
 
 
-if not os.path.exists("oi8.1_html_po-igrah_medalje"):   # shrani html-je za medalje po igrah (letih) v mapo
+if not os.path.exists("oi8.1_html_po-igrah_medalje"):   # shrani html-je za medalje po igrah v mapo
     oi2_pridobi.shrani_url_kot_html_po_igrah_medalje()    # prenos spletnih strani 18.7.2025
 
-if not os.path.exists("oi8.2_medalje_po-igrah"):      # naredi mapo s csv tabelami medalj po drzavah (za vsako igro (leto) posebaj)
+if not os.path.exists("oi8.2_medalje_po-igrah"):        # naredi mapo s csv tabelami medalj po drzavah (za vsako igro (leto) posebaj)
     oi3_izlusci.st_medalj_po_drzavah()
 
 if not os.path.exists("oi8.3_medalje_pregled.csv"):     # naredi csv tabelo medalj po letih
     oi4_shrani.medalje_skupaj()
 
 
-if not os.path.exists("oi9.1_html_po-igrah_rezultati"): # shrani html-je za rezultate po igrah (letih) v mapo
+if not os.path.exists("oi9.1_html_po-igrah_rezultati"): # shrani html-je za rezultate po igrah v mapo
     oi2_pridobi.shrani_url_kot_html_po_igrah_rezultati()  # prenos spletnih strani 18.7.2025
 
-if not os.path.exists("oi9.2_discipline_po-igrah"):       # naredi mapo s csv tabelami disciplin po letih
+if not os.path.exists("oi9.2_discipline_po-igrah"):     # naredi mapo s csv tabelami disciplin po letih
     oi3_izlusci.seznam_disciplin_po_letih()
 
-if not os.path.exists("oi9.3_discipline_pregled.csv"):   # naredi csv tabelo disciplin po letih
+if not os.path.exists("oi9.3_discipline_pregled.csv"):  # naredi csv tabelo disciplin po letih
     oi4_shrani.discipline_skupaj()

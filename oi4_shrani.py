@@ -1,10 +1,11 @@
 import csv
 import os
 
+
 def medalje_skupaj():
 
-    podatki_medalj = {}  # slovar {drzava: {letomestovrsta: [zlate, srebrne, bronaste, skupaj]}}
-    igre = []  # seznam leto-mesto-vrsta, po vrstnem redu datotek
+    podatki_medalj = {}
+    igre = []
 
     for datoteka in os.listdir("oi8.2_medalje_po-igrah"):
         letomestovrsta = datoteka.replace("_medalje.csv", "")
@@ -50,7 +51,7 @@ def discipline_skupaj():
 
     igre = []
     vse_discipline = set()
-    discipline_po_igrah = {}  # slovar: {letomestovrsta: množica_disciplin}
+    discipline_po_igrah = {}
 
     for datoteka in os.listdir("oi9.2_discipline_po-igrah"):
         letomestovrsta = datoteka.replace("_discipline.csv", "")
@@ -59,38 +60,33 @@ def discipline_skupaj():
 
         with open(pot, "r", encoding="utf-8") as f:
             besedilo = csv.reader(f)
-            next(besedilo)  # preskoci glavo
-            discipline = set()  # lokalna množica disciplin za to igro
+            next(besedilo)
+            discipline = set()
             for vrstica in besedilo:
                 disciplina = vrstica[0]
-                # disciplina = vrstica[0].strip()  # odstrani presledke....to bom dala samo ce bo nujno
 
-                if disciplina:  # ce ni prazno-zaradi zadnje vrstice
+                if disciplina:
                     discipline.add(disciplina) 
                     vse_discipline.add(disciplina)
 
             discipline_po_igrah[letomestovrsta] = discipline
 
-    vse_discipline = sorted(vse_discipline) # po abecedi
+    vse_discipline = sorted(vse_discipline)
 
     with open("oi9.3_discipline_pregled.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         glava = ["Disciplina"] + igre
         writer.writerow(glava)
 
-        # vrstica_vrsta = ["Vrsta"] + [podatki_igre.get(igra) for igra in igre]
-
-        # writer.writerow(vrstica_vrsta)
-
         for disciplina in vse_discipline:
-            vrstica = [disciplina]  # začnemo z imenom discipline
+            vrstica = [disciplina]
 
             for igra in igre:
                 if disciplina in discipline_po_igrah.get(igra, set()):
                     vrstica.append("1")
                 else:
                     vrstica.append("0")
-            writer.writerow(vrstica)  # zapišemo vrstico v datoteko
+            writer.writerow(vrstica)
 
     print("Datoteka oi9.3_discipline_pregled.csv ustvarjena.")
 
